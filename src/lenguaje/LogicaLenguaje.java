@@ -27,14 +27,20 @@ public class LogicaLenguaje {
 		System.out.println("Logic Created");
 		//Obtiene el primer valor de tiempo al crear la clase
 		startTime = System.currentTimeMillis();
-		//-----------------------------------------------------
+		//---------------------Abajo sigue tu codigo--------------------------------
+		
+		
 		
 	}
 	//PAINT -> EQUIVALENTE A DRAW
 	public void paint() {
 		checkTime();
+		//---------------------Abajo sigue tu codigo--------------------------------
+		
+		
 	}
 	
+	//---------------------Abajo siguen tus  Metodos--------------------------------
 	
 	
 	

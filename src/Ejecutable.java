@@ -1,4 +1,5 @@
 
+import Model.Model;
 import lenguaje.LogicaLenguaje;
 import processing.core.PApplet;
 import processing.data.Table;
@@ -33,7 +34,7 @@ public class Ejecutable extends PApplet {
 	}
 	
 	public void setup() {
-		stage = 1;
+		stage = 0;
 		createStage();
 		createCVS();
 	}
@@ -55,26 +56,23 @@ public class Ejecutable extends PApplet {
 		//Probando guardarile de CVS
 		  table = new Table();
 		  
-		  table.addColumn("Tipo de Inteligencia");
+		  table.addColumn("Tipo");
 		  table.addColumn("Tiempo");
 		  table.addColumn("Puntaje");
-		  /*
-		  TableRow newRow = table.addRow();
-		  newRow.setInt("id", table.getRowCount() - 1);
-		  newRow.setString("species", "Reptil");
-		  newRow.setString("name", "Pejelagarto");
-		  System.out.println("Saving CSV");
-		  saveTable(table, "data/new.csv");
-		  TableRow newRow2 = table.addRow();
-		  newRow2.setInt("id", table.getRowCount() - 1);
-		  newRow2.setString("species", "Aver");
-		  newRow2.setString("name", "Pedoractilo");
-		  System.out.println("Saving CSV");
-		  */
 		  saveTable(table, "data/new.csv");
 	}
 	
 	public void saveData() {
+		Model tempModel = logicaLenguaje.getModel();
+		
+		  
+		  TableRow newRow = table.addRow();
+		  newRow.setString("Tipo",  tempModel.getName());
+		  newRow.setString("species", "Reptil");
+		  newRow.setString("name", "Pejelagarto");
+		  System.out.println("Saving CSV");
+		  
+		  saveTable(table, "data/new.csv");
 		
 	}
 	
