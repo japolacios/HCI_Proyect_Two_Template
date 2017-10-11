@@ -1,98 +1,81 @@
 package lenguaje;
-import Model.Model;
+
+import java.util.ArrayList;
+
 import processing.core.PApplet;
+
 public class LogicaLenguaje {
-	
-	
-	public String nombrePrueba = "Aqui va el nombre de su prueba";
-	public int totalQuestions = 20; // Numero total de preguntas para terminar el juego
-	
-	
-	//----------------------------------------------------------------------
-	//Atributos
-	public PApplet app;
-	//Tiempo y control
-	public double startTime;
-	public int maxTime = 600000; // 10 minutos (600'000 milisegundos)
-	public double stageTime;
-	public boolean gameOver = false; //True cuando se termine el tiempo o las preguntas	
-	public int currentQuestion = 1; //Numero actual de la pregunta en la que se encuentra
-	public int correctAnswers = 0; //Numero total de respuestas acertadas
-	public Model gameModel;
-	//------------------------------------------------------------------------
-	
-	//INICIA LA CLASE PRINCIPAL
+
+	private PApplet app;
+	private ArrayList<MultipleChoiseModel> multiples;
+	private Ui ui;
+	private int correct, question;
+	private boolean start, gameOver;
+
 	public LogicaLenguaje(PApplet _app) {
 		app = _app;
-		System.out.println("Logic Created");
-		//Obtiene el primer valor de tiempo al crear la clase
-		startTime = System.currentTimeMillis();
-		//---------------------Abajo sigue tu codigo--------------------------------
-		
-		
-		
+		start = false;
+		gameOver = false;
+		correct = 0;
+		multiples = new ArrayList<MultipleChoiseModel>();
+		ui = new Ui(app);
+		populateMultiple();
+		question = 0; // DevPurpose
 	}
-	//PAINT -> EQUIVALENTE A DRAW
+
 	public void paint() {
-		checkTime();
-		//---------------------Abajo sigue tu codigo--------------------------------
-		
-		
-	}
-	
-	//---------------------Abajo siguen tus  Metodos--------------------------------
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*********************************************************************************************
-	 * 
-	 * 
-	 * 
-	 * METODOS GENERICOS PARA TIEMPO Y CAMBIO DE ACTIVIDAD
-	 * 
-	 * 
-	 * 
-	 */
-	//Verificamos si ya transcurrieron 10minutos
-	public void checkTime() {
-		double actualTime = (maxTime + startTime) - System.currentTimeMillis();
-		
-		if(actualTime<= 0) {
-			//Se termino el tiempo
-			stageTime = 600000;
-			gameOver = true;
-			
+		if (start == false) {
+			app.text("Pruebas de Lenguaje", app.width / 2, app.height / 2);
+		} else {
+			if (start == true && gameOver == false) {
+				paintQuestions(question);
+			}
+			if(gameOver == true) {
+				ui.paint();
+			}
 		}
 	}
-	
-	//Verificamos cuando se acaban las preguntas (Cada que el usuario responda una pregunta se debe llamar a este metodo)
-	public void checkQuestions() {
-		if (currentQuestion>totalQuestions) {
-			stageTime = maxTime - (System.currentTimeMillis() - startTime);
-			gameOver = true;
+
+	public void paintQuestions(int _q) {
+		app.text(multiples.get(_q).getQuestion(), (app.width / 2), (app.height / 4));
+
+		app.text((String) multiples.get(_q).gewtAnswerOne().get(0), (app.width / 3), (app.height / 4) * 2);
+		app.text((String) multiples.get(_q).gewtAnswerOne().get(1), (app.width / 3), (app.height / 4) * 3);
+		app.text((String) multiples.get(_q).gewtAnswerOne().get(2), (app.width / 3) * 2, (app.height / 4) * 2);
+		app.text((String) multiples.get(_q).gewtAnswerOne().get(3), (app.width / 3) * 2, (app.height / 4) * 3);
+
+	}
+
+	public void populateMultiple() {
+		System.out.println("Creating Questions DataBase");
+		MultipleChoiseModel q1 = new MultipleChoiseModel("Internet es a Comnuicacion como Carro es a", "Transporte",
+				"Queso", "Zapato", "Sizas");
+
+		MultipleChoiseModel q2 = new MultipleChoiseModel("Perro esa purina como huskies es a", "Gato", "Queso",
+				"Zapato", "Sizas");
+
+		MultipleChoiseModel q3 = new MultipleChoiseModel("Hitman es a matar como Politico es a", "Robar", "Queso",
+				"Zapato", "Sizas");
+
+		multiples.add(q1);
+		multiples.add(q2);
+		multiples.add(q3);
+		start = true;
+	}
+
+	public void click() {
+		if (question == 0) {
+			if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+				question++;
+				correct++;
+			}
+		}
+		if (question == 1) {
+			if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+				question++;
+				correct++;
+				gameOver = true;
+			}
 		}
 	}
-	
-	
-	public boolean getGameOver() {
-		return gameOver;
-	}	
-	
-	public void createModel() {
-		gameModel = new Model(nombrePrueba, stageTime, correctAnswers);
-	}
-	
-	public Model getModel() {
-		return gameModel;
-	}
-	
-	/*********************************************************************************************
-	 * 
-	 */
 }
