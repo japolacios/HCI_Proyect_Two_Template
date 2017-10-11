@@ -19,7 +19,7 @@ public class Ejecutable extends PApplet {
 	public boolean newStage;
 	// Atributos/relaciones
 	public Inicio inicio;
-	public LogicaLenguaje logicaLenguaje;
+	public LogicaLenguaje logicaLenguaje, logicaLenguaje2;
 
 	public static void main(String[] args) {
 		PApplet.main("Ejecutable");
@@ -47,8 +47,12 @@ public class Ejecutable extends PApplet {
 				System.out.println("Stage 0 Created");
 			}
 			if (stage == 1) {
-				logicaLenguaje = new LogicaLenguaje(this);
+				logicaLenguaje = new LogicaLenguaje(this, table);
 				System.out.println("Stage 1 Created");
+			}
+			if (stage == 2) {
+				logicaLenguaje2 = new LogicaLenguaje(this, table);
+				System.out.println("Stage 2 Created");
 			}
 			
 			newStage = true;
@@ -63,7 +67,6 @@ public class Ejecutable extends PApplet {
 		table = new Table();
 
 		table.addColumn("Tipo");
-		table.addColumn("Tiempo");
 		table.addColumn("Puntaje");
 		table.addColumn("Autopuntaje");
 		table.addColumn("Posicion");
@@ -110,6 +113,13 @@ public class Ejecutable extends PApplet {
 				newStage = false;
 			}
 		}
+		if (stage == 1) {
+			if (logicaLenguaje != null && logicaLenguaje.getDataSaved() == true) {
+				stage = 2;
+				newStage = false;
+			}
+		}
+		
 	}
 
 	public void mouseClicked() {

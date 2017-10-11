@@ -2,10 +2,14 @@ package lenguaje;
 import processing.core.PApplet;
 
 public class Ui {
-	PApplet app;
-	
+	private PApplet app;
+	private boolean doneHere;
+	int autoScore, position;
 	public Ui(PApplet _app) {
 		app = _app;
+		doneHere = false;
+		autoScore = 3;
+		position = 9;
 	}
 	
 	public void paint() {
@@ -26,4 +30,25 @@ public class Ui {
 			app.text(i+1, ((app.width/10)*i)+((app.width/10)/2), (app.height/3)*2+50);
 		}
 	}
+	
+	public int getAutoScore() {
+		return autoScore;
+	}
+	
+	public int getPosition() {
+		return position;
+	}
+	
+	public boolean getDoneHere() {
+		return doneHere;
+	}
+	
+	public void click() {
+		//For next Minigame and saveData
+		if(app.mouseX >= 1000) {
+			doneHere = true;
+		}
+	}
+	
+	
 }

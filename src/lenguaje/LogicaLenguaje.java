@@ -3,6 +3,8 @@ package lenguaje;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.data.Table;
+import processing.data.TableRow;
 
 public class LogicaLenguaje {
 
@@ -10,13 +12,17 @@ public class LogicaLenguaje {
 	private ArrayList<MultipleChoiseModel> multiples;
 	private Ui ui;
 	private int correct, question;
-	private boolean start, gameOver;
+	private boolean start, gameOver, dataSaved;
+	private Table table;
+	public String tipoInteligencia = "El Tipo de Inteligencia";
 
-	public LogicaLenguaje(PApplet _app) {
+	public LogicaLenguaje(PApplet _app, Table _table) {
 		app = _app;
 		start = false;
 		gameOver = false;
+		dataSaved = false;
 		correct = 0;
+		table = _table;
 		multiples = new ArrayList<MultipleChoiseModel>();
 		ui = new Ui(app);
 		populateMultiple();
@@ -30,8 +36,11 @@ public class LogicaLenguaje {
 			if (start == true && gameOver == false) {
 				paintQuestions(question);
 			}
-			if(gameOver == true) {
+			if (gameOver == true) {
 				ui.paint();
+				if (ui.getDoneHere() == true) {
+					saveData();
+				}
 			}
 		}
 	}
@@ -63,19 +72,40 @@ public class LogicaLenguaje {
 		start = true;
 	}
 
+	public void saveData() {
+		TableRow newRow = table.addRow();
+		newRow.setString("Tipo", tipoInteligencia);
+		newRow.setInt("Puntaje", correct);
+		newRow.setInt("Autopuntaje", ui.getAutoScore());
+		newRow.setInt("Posicion", ui.getPosition());
+		System.out.println("Saving CSV");
+
+		app.saveTable(table, "data/new.csv");
+		dataSaved = true;
+	}
+
 	public void click() {
-		if (question == 0) {
-			if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-				question++;
-				correct++;
+		if (gameOver == false) {
+			if (question == 0) {
+				if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+					question++;
+					correct++;
+				}
+			}
+			if (question == 1) {
+				if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+					question++;
+					correct++;
+					gameOver = true;
+				}
 			}
 		}
-		if (question == 1) {
-			if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-				question++;
-				correct++;
-				gameOver = true;
-			}
+		if (gameOver == true) {
+			ui.click();
 		}
+	}
+	
+	public boolean getDataSaved() {
+		return dataSaved;
 	}
 }
