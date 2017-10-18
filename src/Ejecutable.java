@@ -130,4 +130,11 @@ public class Ejecutable extends PApplet {
 			logicaLenguaje.click();
 		}
 	}
+	
+	public void mouseReleased() {
+		if(stage == 1) {
+			logicaLenguaje.released();
+			System.out.println("Released");
+		}
+	}
 }
