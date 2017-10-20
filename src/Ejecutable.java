@@ -134,7 +134,13 @@ public class Ejecutable extends PApplet {
 	public void mouseReleased() {
 		if(stage == 1) {
 			logicaLenguaje.released();
-			System.out.println("Released");
+			//System.out.println("Released");
+		}
+	}
+	
+	public void keyPressed(){
+		if (stage == 1) {
+			//logicaVp.key();
 		}
 	}
 }

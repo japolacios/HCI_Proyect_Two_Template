@@ -137,13 +137,13 @@ public class LogicaLenguaje {
 
 	public void click() {
 		if (gameOver == false) {
-			if (released = true) {
+			if (released == true) {
 				if (question == 0) {
 					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
 						released = false;
 						question++;
 						correct++;
-						
+						return;
 					}
 				}
 				if (question == 1) {
@@ -151,6 +151,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;
 						released = false;
+						return;
 					}
 				}
 				if (question == 2) {
@@ -158,6 +159,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;
 						released = false;
+						return;
 					}
 				} 
 				if (question == 3) {
@@ -165,6 +167,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;
 						released = false;
+						return;
 					}
 				}
 				if (question == 4) {
@@ -172,6 +175,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;
 						released = false;
+						return;
 					}
 				}
 				if (question == 5) {
@@ -179,6 +183,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;
 						released = false;
+						return;
 					}
 				}
 				if (question == 6) {
@@ -186,6 +191,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;						
 						released = false;
+						return;
 					}
 				}
 				if (question == 7) {
@@ -193,6 +199,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;
 						released = false;
+						return;
 					}
 				}
 				if (question == 8) {
@@ -200,6 +207,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;
 						released = false;
+						return;
 					}
 				}
 				if (question == 9) {
@@ -207,6 +215,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;
 						released = false;
+						return;
 					}
 				}
 				if (question == 10) {
@@ -214,6 +223,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;
 						released = false;
+						return;
 					}
 				}
 				if (question == 11) {
@@ -221,6 +231,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;						
 						released = false;
+						return;
 					}
 				}
 				if (question == 12) {
@@ -228,6 +239,7 @@ public class LogicaLenguaje {
 						question++;
 						correct++;						
 						released = false;
+						return;
 					}
 				}
 				if (question == 13) {
@@ -235,20 +247,26 @@ public class LogicaLenguaje {
 						question++;
 						correct++;						
 						released = false;
+						return;
 					}
 				}
 				if (question == 14) {
 					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
 						question++;
 						correct++;
-						gameOver = true;
 						released = false;
 						gameOver = true;
+						return;
+					}
+					else {
+						gameOver = true;
+						return;
 					}
 				}
 				else {
 					question++;
 					released = false;
+					return;
 				}
 			}
 		}
@@ -259,9 +277,10 @@ public class LogicaLenguaje {
 
 	public void released() {
 		released = true;
-		System.out.println("Really released");
+		//System.out.println("Really released");
 	}
-
+	
+	
 	public boolean getDataSaved() {
 		return dataSaved;
 	}
