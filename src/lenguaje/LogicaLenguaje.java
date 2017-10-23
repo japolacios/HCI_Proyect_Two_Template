@@ -48,6 +48,7 @@ public class LogicaLenguaje {
 	}
 
 	public void paintQuestions(int _q) {
+		app.fill(255);
 		app.text(multiples.get(_q).getQuestion(), (app.width / 2), (app.height / 4));
 
 		app.text((String) multiples.get(_q).gewtAnswerOne().get(0), (app.width / 3), (app.height / 4) * 2);
@@ -60,50 +61,64 @@ public class LogicaLenguaje {
 	public void populateMultiple() {
 		System.out.println("Creating Questions DataBase");
 		// Correcta 1
-		MultipleChoiseModel q1 = new MultipleChoiseModel("1.Internet es a Comnuicacion como Carro es a", "Esta",
-				"Queso", "Zapato", "Sizas");
+		MultipleChoiseModel q1 = new MultipleChoiseModel("Internet es a comunicar, como carro es a:", "Transportar",
+				"Correr", "Impuestos", "Alcohol");
 		// Correcta 2
-		MultipleChoiseModel q2 = new MultipleChoiseModel("2.Perro esa purina como wiskas es a", "Queso", "Esta", "Zapato",
-				"Sizas");
+		MultipleChoiseModel q2 = new MultipleChoiseModel("Sentar es a silla, como acostar es a:", "Mesa", "Cama", "Asiento",
+				"Sala");
 		// correcta 1
-		MultipleChoiseModel q3 = new MultipleChoiseModel("3.Hitman es a matar como Politico es a", "Esta", "Queso",
-				"Zapato", "Sizas");
+		MultipleChoiseModel q3 = new MultipleChoiseModel("Aleta es a pez, como una mano es a:", "Humano", "Cerdo",
+				"Pájaro", "Anfibio");
 		// correcta 2
-		MultipleChoiseModel q4 = new MultipleChoiseModel("4.Hitman es a matar como Politico es a", "Robar", "Esta",
-				"Zapato", "Sizas");
+		MultipleChoiseModel q4 = new MultipleChoiseModel("Volar es a cielo, cómo caer a:", "Pared", "Suelo",
+				"Patio", "Techo");
 		// correcta 4
-		MultipleChoiseModel q5 = new MultipleChoiseModel("5.Hitman es a matar como Politico es a", "Robar", "Queso",
-				"Zapato", "Esta");
+		MultipleChoiseModel q5 = new MultipleChoiseModel("Comida es a restaurante, como libro es a:", "Hospital", "Supermercado",
+				"Aeropuerto", "Biblioteca");
 		// correcta 1
-		MultipleChoiseModel q6 = new MultipleChoiseModel("6.Hitman es a matar como Politico es a", "Esta", "Queso",
-				"Zapato", "Sizas");
+		MultipleChoiseModel q6 = new MultipleChoiseModel("Leche es a vaca como, Lana es a:", "Oveja", "Abeja",
+				"Salmon", "Navaja");
 		// correcta 4
-		MultipleChoiseModel q7 = new MultipleChoiseModel("7.Hitman es a matar como Politico es a", "Robar", "Queso",
-				"Zapato", "Esta");
+		MultipleChoiseModel q7 = new MultipleChoiseModel("Luna es a noche, como sol es a:", "Nube", "Eclipse",
+				"Estrella", "Día");
+		
+		//Breakpoint
 		// correcta 2
-		MultipleChoiseModel q8 = new MultipleChoiseModel("8.Hitman es a matar como Politico es a", "Robar", "Esta",
-				"Zapato", "Sizas");
+		MultipleChoiseModel q8 = new MultipleChoiseModel("¿De qué nos habla el texto? Elige la respuesta más correcta.", "Del jardín de la casa", "Del cuarto de baño de la casa del molinero",
+				"De la chimenea", "De la casa del molinero");
 		// correcta 3
-		MultipleChoiseModel q9 = new MultipleChoiseModel("9.Hitman es a matar como Politico es a", "Robar", "Queso",
-				"Esta", "Sizas");
+		MultipleChoiseModel q9 = new MultipleChoiseModel("¿Cómo era el lavamanos del cuarto de baño?", "Acogedor ", "Mármol",
+				"Blanco", "Blanco con forma de serpiente");
 		// correcta 3
-		MultipleChoiseModel q10 = new MultipleChoiseModel("10.Hitman es a matar como Politico es a", "Robar", "Queso",
-				"Esta", "Sizas");
+		MultipleChoiseModel q10 = new MultipleChoiseModel("¿Dónde estaba el jardín?", "En la parte delantera de la casa", "No tiene jardín",
+				"En la parte trasera de la casa.", "En el patio interior");
+		
+		//Breakpoint
 		// correcta 2
-		MultipleChoiseModel q11 = new MultipleChoiseModel("11.Hitman es a matar como Politico es a", "Robar", "Esta",
-				"Zapato", "Sizas");
+		MultipleChoiseModel q11 = new MultipleChoiseModel("aamnadirn", "Idioma", "Fruta",
+				"Animal", "Color");
 		// correcta 1
-		MultipleChoiseModel q12 = new MultipleChoiseModel("12.Hitman es a matar como Politico es a", "Esta", "Queso",
-				"Zapato", "Sizas");
+		MultipleChoiseModel q12 = new MultipleChoiseModel("oeoenltf", "Objeto", "Pais",
+				"Ciudad", "Numero");
 		// correcta 4
-		MultipleChoiseModel q13 = new MultipleChoiseModel("13.Hitman es a matar como Politico es a", "Robar", "Queso",
-				"Zapato", "Esta");
+		MultipleChoiseModel q13 = new MultipleChoiseModel("uanighr", "Animal", "Color",
+				"Pronombre", "Pais");
 		// correcta 1
-		MultipleChoiseModel q14 = new MultipleChoiseModel("14.Hitman es a matar como Politico es a", "Esta", "Queso",
-				"Zapato", "Sizas");
+		MultipleChoiseModel q14 = new MultipleChoiseModel("ppurrau", "Color", "Objeto",
+				"Pais", "Ciudad");
 		// correcta 3
-		MultipleChoiseModel q15 = new MultipleChoiseModel("15.Hitman es a matar como Politico es a", "Robar", "Queso",
-				"Esta", "Sizas");
+		MultipleChoiseModel q15 = new MultipleChoiseModel("aensito", "Pais", "Animal",
+				"Objeto", "Color");
+		
+		
+		//BreakPoint
+		// correcta 4
+		MultipleChoiseModel q16 = new MultipleChoiseModel("Fuimos a comer donde ___ mariscos con chocolate", "Ahí", "Ay",
+				"Hai", "Hay");
+		// correcta 4
+		MultipleChoiseModel q17 = new MultipleChoiseModel("Sinonimo de nostalgia:  -palabras parecidas pero que no son cotidianas", "Arañazo", "Añuranza",
+				"Aruñanza", "Añoranza");
+		
 
 		multiples.add(q1);
 		multiples.add(q2);
@@ -120,6 +135,8 @@ public class LogicaLenguaje {
 		multiples.add(q13);
 		multiples.add(q14);
 		multiples.add(q15);
+		multiples.add(q16);
+		multiples.add(q17);
 		start = true;
 	}
 

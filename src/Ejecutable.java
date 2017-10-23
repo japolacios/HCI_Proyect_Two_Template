@@ -1,8 +1,11 @@
 
+import Balanzas.LogicaBalanzas;
 import lenguaje.LogicaLenguaje;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.data.Table;
 import processing.data.TableRow;
+import velprocesamiento.LogicaVp;
 
 /****************************
  * Esta clase es quien inicializa y corre el applet para probar cada modulo del
@@ -19,7 +22,10 @@ public class Ejecutable extends PApplet {
 	public boolean newStage;
 	// Atributos/relaciones
 	public Inicio inicio;
-	public LogicaLenguaje logicaLenguaje, logicaLenguaje2;
+	public PImage bg;
+	public LogicaLenguaje logicaLenguaje;
+	public LogicaBalanzas logicaBalanzas;
+	public LogicaVp logicaVp;
 
 	public static void main(String[] args) {
 		PApplet.main("Ejecutable");
@@ -32,12 +38,21 @@ public class Ejecutable extends PApplet {
 	}
 
 	public void setup() {
+		loadImages();
 		System.out.println("Setting stage to Initial state");
 		stage = 0;
 		newStage = false;
 		System.out.println("Calling create Stage Method");
 		createStage();
 		createCVS();
+	}
+	
+	public void loadImages() {
+		try {
+		bg = loadImage("./data/lenguaje/background.jpg");
+		} catch(Exception e) {
+			
+		}
 	}
 
 	public void createStage() {
@@ -51,8 +66,12 @@ public class Ejecutable extends PApplet {
 				System.out.println("Stage 1 Created");
 			}
 			if (stage == 2) {
-				logicaLenguaje2 = new LogicaLenguaje(this, table);
+				logicaBalanzas = new LogicaBalanzas(this, table);
 				System.out.println("Stage 2 Created");
+			}
+			if (stage == 3) {
+				logicaVp = new LogicaVp(this, table);
+				System.out.println("Stage 3 Created");
 			}
 			
 			newStage = true;
@@ -95,12 +114,20 @@ public class Ejecutable extends PApplet {
 		if (stage == 1) {
 			logicaLenguaje.paint();
 		}
+		if (stage == 2) {
+			logicaBalanzas.paint();
+		}
+		if (stage == 3) {
+			logicaVp.paint();
+		}
 	}
 
 	public void draw() {
+		
+		image(bg,0,0);
 		checkStage();
 		createStage();
-		background(255);
+		//background(255);
 		fill(0);
 		textAlign(CENTER);
 		paintStage();
@@ -119,6 +146,18 @@ public class Ejecutable extends PApplet {
 				newStage = false;
 			}
 		}
+		if (stage == 2) {
+			if (logicaBalanzas != null && logicaBalanzas.getDataSaved() == true) {
+				stage = 3;
+				newStage = false;
+			}
+		}
+		if (stage == 3) {
+			if (logicaVp != null && logicaVp.getDataSaved() == true) {
+				stage = 1;
+				newStage = false;
+			}
+		}
 		
 	}
 
@@ -129,6 +168,12 @@ public class Ejecutable extends PApplet {
 		if (stage == 1) {
 			logicaLenguaje.click();
 		}
+		if (stage == 2) {
+			logicaBalanzas.click();
+		}
+		if (stage == 3) {
+			logicaVp.click();
+		}
 	}
 	
 	public void mouseReleased() {
@@ -136,11 +181,19 @@ public class Ejecutable extends PApplet {
 			logicaLenguaje.released();
 			//System.out.println("Released");
 		}
+		
+		if (stage == 2) {
+			logicaBalanzas.released();
+		}
+		
+		if (stage == 3) {
+			logicaVp.mReleased();
+			}
 	}
 	
 	public void keyPressed(){
 		if (stage == 1) {
-			//logicaVp.key();
+			logicaVp.key();
 		}
 	}
 }
