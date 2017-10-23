@@ -24,8 +24,8 @@ public class Patron {
 		contador = (int) app.random(6);
 		pos = new PVector(x, y);
 		vel = new PVector(0, 0);
-		ace = new PVector(0, 0.01f);
-		topS = 3;
+		ace = new PVector(0, 0.03f);
+		topS = 10;
 		colores();
 	}
 
@@ -47,10 +47,10 @@ public class Patron {
 
 	public void mover() {
 		if (izq) {
-			vel.add(new PVector(-0.05f, 0));
+			vel.add(new PVector(-0.07f, 0));
 			der = false;
 		} else if (der) {
-			vel.add(new PVector(0.05f, 0));
+			vel.add(new PVector(0.07f, 0));
 			izq = false;
 		}
 

@@ -192,7 +192,7 @@ public class Ejecutable extends PApplet {
 	}
 	
 	public void keyPressed(){
-		if (stage == 1) {
+		if (stage == 3) {
 			logicaVp.key();
 		}
 	}

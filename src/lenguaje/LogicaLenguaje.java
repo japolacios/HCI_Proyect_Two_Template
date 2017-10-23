@@ -3,6 +3,7 @@ package lenguaje;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.data.Table;
 import processing.data.TableRow;
 
@@ -15,6 +16,7 @@ public class LogicaLenguaje {
 	private boolean start, gameOver, dataSaved, released;
 	private Table table; // Se recibe desde Ejecutable para guardar los datos
 	public String tipoInteligencia = "Inteligencia Linguistica";
+	public PImage bg_q;
 
 	public LogicaLenguaje(PApplet _app, Table _table) {
 		app = _app;
@@ -28,6 +30,7 @@ public class LogicaLenguaje {
 		populateMultiple();
 		released = true;
 		question = 0; // DevPurpose
+		bg_q = app.loadImage("./data/lenguaje/fondo_lenguaje.png");
 
 	}
 
@@ -36,6 +39,7 @@ public class LogicaLenguaje {
 			app.text("Pruebas de Lenguaje", app.width / 2, app.height / 2);
 		} else {
 			if (start == true && gameOver == false) {
+				app.image(bg_q, 0, 0);
 				paintQuestions(question);
 			}
 			if (gameOver == true) {
@@ -118,7 +122,12 @@ public class LogicaLenguaje {
 		// correcta 4
 		MultipleChoiseModel q17 = new MultipleChoiseModel("Sinonimo de nostalgia:  -palabras parecidas pero que no son cotidianas", "Arañazo", "Añuranza",
 				"Aruñanza", "Añoranza");
-		
+		// correcta 1
+				MultipleChoiseModel q18 = new MultipleChoiseModel("Los diferentes tipos de antónimos son:", "Gradual, complementario, recíproco", "Complementario, negador, sinónimo",
+						"Inequívoco, gradual, igualitario", "Recíproco, complementario, nulo");
+				// correcta 3
+				MultipleChoiseModel q19 = new MultipleChoiseModel("Un verbo indica un:", "Acción, operación, nombre", "Descripción, acción, operación",
+						"Acción, proceso, estado", "Actuacion, nombre, estado");
 
 		multiples.add(q1);
 		multiples.add(q2);
@@ -137,6 +146,8 @@ public class LogicaLenguaje {
 		multiples.add(q15);
 		multiples.add(q16);
 		multiples.add(q17);
+		multiples.add(q18);
+		multiples.add(q19);
 		start = true;
 	}
 

@@ -32,6 +32,7 @@ public class LogicaVp {
 	private PImage instruc;
 	private int button;
 	private PImage asteroide;
+	private int turnosG2;
 
 	public LogicaVp(PApplet _app, Table _table) {
 		app = _app;
@@ -150,9 +151,10 @@ public class LogicaVp {
 			patrones.get(i).mover();
 			patrones.get(i).pintar();
 			Patron pTemp = patrones.getLast();
-			if (pTemp.getX() >= app.width + 10 || pTemp.getX() <= -40) {
+			if (pTemp.getX() >= app.width + 40 || pTemp.getX() <= -40) {
 				System.out.println("SE CREA NUEVO ASTEROIDE");
 				validacionAsteroides();
+				turnosG2+=1;
 				crearAsteroides();
 				patrones.getLast().setSpeed();
 				patrones.getLast().setDer(false);
@@ -160,11 +162,16 @@ public class LogicaVp {
 				patrones.removeFirst();
 			} else if (patrones.getLast().getY() >= app.height + 40) {
 				crearAsteroides();
+				turnosG2+=1;
 				patrones.getLast().setSpeed();
 				patrones.getLast().setDer(false);
 				patrones.getLast().setIzq(false);
 				patrones.removeFirst();
 			}
+		}
+		
+		if (turnosG2==15) {
+			gameOver=true;
 		}
 
 	}
@@ -228,7 +235,7 @@ public class LogicaVp {
 
 	public void databaseFlags() {
 		cargarBanderas();
-		// CONDICIÓN DE INICIO
+		// CONDICIï¿½N DE INICIO
 		start = true;
 	}
 
@@ -278,6 +285,9 @@ public class LogicaVp {
 				isReleased = false;
 				System.out.println("El min es: " + min + " y el max es: " + max);
 
+			}
+			if (gameOver == true) {
+				ui.click();
 			}
 		}
 	}
