@@ -17,7 +17,8 @@ public class LogicaPuzzle {
 	private int stage;
 	private boolean changeDos;
 	Ui ui;
-
+	boolean gameOver;
+	int counter;
 
 	public LogicaPuzzle(PApplet _app, Table _table) {
 		stage = 0;
@@ -30,9 +31,15 @@ public class LogicaPuzzle {
 		img = app.loadImage("fondo.png");
 		changeDos = true;
 		dataSaved = false;
+		gameOver = false;
+		counter = 1;
 	}
 
 	public void paint() {
+		
+		if (gameOver == true) {
+			ui.paint();
+		} else {
 		app.image(img, 0, 0);
 		if (stage == 0) {
 			log.pintar();
@@ -43,18 +50,32 @@ public class LogicaPuzzle {
 			//CAMBIO DE PANTALLA, ENTRA S�LO UNA VEZ
 			if(fig.getTime()>=60000 && changeDos){
 				stage = 2;
+				counter++;
+				if (counter>= 6) {
+					gameOver = true;
+				}
 				changeDos = false;
-				saveData();
+				return;
 			}
+		}
 		}
 		
 		//System.out.println(fig.getCambio());
 	}
 
 	public void pressed() {
+		
+		if(gameOver = true) {
+			ui.click();
+			if(ui.getDoneHere() == true) {
+				saveData();
+			}
+		} else {
+		
 		if (stage == 0)
 			log.select();
 		System.out.println(app.mouseX + " " + app.mouseY);
+		}
 	}
 
 	public void dragged() {
@@ -85,7 +106,7 @@ public class LogicaPuzzle {
 	public void saveData() {
 		TableRow newRow = table.addRow();
 		newRow.setString("Tipo", tipoInteligencia);
-		newRow.setInt("Puntaje", 2);
+		newRow.setInt("Puntaje", log.getPuntajeFinal());
 		newRow.setInt("Autopuntaje", ui.getAutoScore());
 		newRow.setInt("Posicion", ui.getPosition());
 		System.out.println("Saving CSV");

@@ -37,9 +37,9 @@ public class Logica {
 		// CARGO LOS BOTONES
 
 		button = new PImage[3];
-		button[0] = app.loadImage("boton/enviar1.png");
-		button[1] = app.loadImage("boton/enviar2.png");
-		button[2] = app.loadImage("boton/enviar3.png");
+		button[0] = app.loadImage("boton2/enviar1.png");
+		button[1] = app.loadImage("boton2/enviar2.png");
+		button[2] = app.loadImage("boton2/enviar3.png");
 
 		// CARGO TYPO
 		nunito = new PFont[3];

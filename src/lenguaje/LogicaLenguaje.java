@@ -191,7 +191,7 @@ public class LogicaLenguaje {
 	public void saveData() {
 		TableRow newRow = table.addRow();
 		newRow.setString("Tipo", tipoInteligencia);
-		newRow.setInt("Puntaje", (correct/question)*100);
+		newRow.setInt("Puntaje", (int) (correct/question)*100);
 		newRow.setInt("Autopuntaje", ui.getAutoScore());
 		newRow.setInt("Posicion", ui.getPosition());
 		System.out.println("Saving CSV");
