@@ -6,6 +6,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.Table;
 import processing.data.TableRow;
+import puzzle.LogicaPuzzle;
 import velprocesamiento.LogicaVp;
 
 /****************************
@@ -28,6 +29,7 @@ public class Ejecutable extends PApplet {
 	public LogicaBalanzas logicaBalanzas;
 	public LogicaVp logicaVp;
 	private LogicaMemoria logicaMemoria;
+	public LogicaPuzzle logicaPuzzle;
 
 	public static void main(String[] args) {
 		PApplet.main("Ejecutable");
@@ -79,6 +81,10 @@ public class Ejecutable extends PApplet {
 				logicaMemoria = new LogicaMemoria(this, table);
 				System.out.println("Stage 4 Created");
 			}
+			if (stage == 5) {
+				logicaPuzzle = new LogicaPuzzle(this, table);
+				System.out.println("Stage 5 Created");
+			}
 			
 			newStage = true;
 		}
@@ -129,6 +135,9 @@ public class Ejecutable extends PApplet {
 		if (stage == 4) {
 			logicaMemoria.paint();
 		}
+		if (stage == 5) {
+			logicaPuzzle.paint();
+		}
 	}
 
 	public void draw() {
@@ -173,6 +182,12 @@ public class Ejecutable extends PApplet {
 				newStage = false;
 			}
 		}
+		if (stage == 5) {
+			if (logicaPuzzle != null && logicaPuzzle.getDataSaved() == true) {
+				stage = 6;
+				newStage = false;
+			}
+		}
 		
 	}
 
@@ -207,6 +222,9 @@ public class Ejecutable extends PApplet {
 		if (stage == 4) {
 			logicaMemoria.soltar();
 		}
+		if (stage == 5) {
+			logicaPuzzle.released();
+			}
 		
 	}
 	
@@ -214,6 +232,9 @@ public class Ejecutable extends PApplet {
 		if (stage == 4) {
 			logicaMemoria.press();
 		}
+		if (stage == 5) {
+			logicaPuzzle.pressed();
+			}
 	}
 	
 	@Override
@@ -221,6 +242,9 @@ public class Ejecutable extends PApplet {
 		if (stage == 4) {
 			logicaMemoria.dragged();
 		}
+		if (stage == 5) {
+			logicaPuzzle.dragged();
+			}
 	}
 	
 	public void keyPressed(){
