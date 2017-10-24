@@ -191,7 +191,7 @@ public class LogicaLenguaje {
 	public void saveData() {
 		TableRow newRow = table.addRow();
 		newRow.setString("Tipo", tipoInteligencia);
-		newRow.setInt("Puntaje", correct);
+		newRow.setInt("Puntaje", (correct/question)*100);
 		newRow.setInt("Autopuntaje", ui.getAutoScore());
 		newRow.setInt("Posicion", ui.getPosition());
 		System.out.println("Saving CSV");
@@ -203,11 +203,16 @@ public class LogicaLenguaje {
 	public void click() {
 		if (gameOver == false) {
 			if (released == true) {
-				if (instrucciones == true) {
+				if (instrucciones == true && leer == false) {
 					System.out.println("Click en Instrucciones: " + instrucciones + " -Question: " + question);
 					released = false;
 					instrucciones = false;
-					System.out.println("insturcciones False");
+					System.out.println("insturcciones False");	
+					return;
+				}
+				if (leer == true) {
+					released = false;
+					leer = false;
 					return;
 				}
 					
@@ -262,18 +267,20 @@ public class LogicaLenguaje {
 					}
 					if (question == 6) {
 						if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
-							question++;
+
 							correct++;
 							released = false;
+							instrucciones = true;
+							leer= true;
 							return;
 						}
 					}
 					if (question == 7) {
 						if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
-
+							question++;
 							correct++;
 							released = false;
-							instrucciones = true;
+							
 							System.out.println("insturcciones True");
 							return;
 						}
@@ -401,10 +408,11 @@ public class LogicaLenguaje {
 							released = false;
 							return;
 						}
-						if(question == 7) {
+						if(question == 6) {
 							question++;
 							instrucciones = true;
 							insNum++;
+							leer = true;
 							return;
 						}
 						if(question == 10) {

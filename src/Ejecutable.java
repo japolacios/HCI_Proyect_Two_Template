@@ -154,7 +154,7 @@ public class Ejecutable extends PApplet {
 	public void checkStage() {
 		if (stage == 0) {
 			if (inicio.getGameOver() == true) {
-				stage = 1;
+				stage =1;
 				newStage = false;
 			}
 		}

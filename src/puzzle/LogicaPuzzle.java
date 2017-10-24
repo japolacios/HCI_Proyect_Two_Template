@@ -21,8 +21,8 @@ public class LogicaPuzzle {
 
 	public LogicaPuzzle(PApplet _app, Table _table) {
 		stage = 0;
-		ui = new Ui(app);
 		app = _app;
+		ui = new Ui(app);
 		table = _table;
 		app.colorMode(app.HSB, 360, 100, 100);
 		log = new Logica(app);
@@ -44,6 +44,7 @@ public class LogicaPuzzle {
 			if(fig.getTime()>=60000 && changeDos){
 				stage = 2;
 				changeDos = false;
+				saveData();
 			}
 		}
 		

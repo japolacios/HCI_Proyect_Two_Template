@@ -63,7 +63,7 @@ public class LogicaMemoria {
 		table = _table;
 		gameOver = false;
 		dataSaved = false;
-		Ui ui = new Ui(app);
+		ui = new Ui(app);
 		modoJuego = 0;
 		noPregunta = 0;
 		bg = app.loadImage("../data/memoria/fondo.png");
@@ -119,6 +119,9 @@ public class LogicaMemoria {
 		
 		if(gameOver == true) {
 			ui.paint();
+			if (ui.getDoneHere() == true) {
+				saveData();
+			}
 		}
 		else {
 		
@@ -472,9 +475,9 @@ public class LogicaMemoria {
 
 			if (noPregunta == 14) {
 				if (btJugar) {
-					if (app.mouseX > app.width / 2 - 50 && app.mouseX < app.width / 2 + 50
-							&& app.mouseY > app.height - 125 && app.mouseY < app.height - 75) {
 						System.out.println(puntaje);
+						gameOver = true;
+						return;
 						/*
 						 * 
 						 * AQU� TERMINA EL MINIJUEGO, AL PRESIONAR EN ESTE BOT�N
@@ -483,8 +486,7 @@ public class LogicaMemoria {
 						 * ENTONCES AQU� VA LA LOGICA DE LA AUTOEVALUACI�N
 						 * 
 						 */
-						gameOver = true;
-					}
+						
 				}
 			}
 
