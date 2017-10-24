@@ -436,135 +436,138 @@ public class LogicaMemoria {
 	}
 
 	public void press() {
-		
-		if(gameOver == true) {
-			ui.click();
-		}else {
-		
-		System.out.println(puntaje);
-		if (entrada) {
-			if (btStart) {
-				if (app.mouseX > app.width / 2 - btIniciarBase.width / 2
-						&& app.mouseX < app.width / 2 + btIniciarBase.width / 2
-						&& app.mouseY > (app.height - 100) - (btIniciarBase.height / 2)
-						&& app.mouseY < (app.height - 100) + (btIniciarBase.height / 2)) {
-					app.imageMode(PConstants.CENTER);
-					app.image(btIniciarPress, app.width / 2, app.height - 100);
-					app.imageMode(PConstants.CORNER);
-					btStart = false;
-					btJugar = true;
-					entrada = false;
 
-				}
-			}
-		}
+	    if(gameOver == true) {
+	        ui.click();
+	    }else {
 
-		// ----------------------------------------------CASO 0 - PREGUNTAS ABCD
-		if (modoJuego == 0) {
-			if (noPregunta > 2 && noPregunta < 14) {
-				if (btJugar) {
-					if (app.mouseX > app.width / 2 - 50 && app.mouseX < app.width / 2 + 50
-							&& app.mouseY > app.height - 125 && app.mouseY < app.height - 75) {
-						t_actualizado = t;
-						btJugar = false;
-						t_inicial = t;
-						noPregunta++;
-					}
-				}
-			}
+	        System.out.println(puntaje);
+	        if (entrada) {
+	            if (btStart) {
+	                if (app.mouseX > app.width / 2 - btIniciarBase.width / 2
+	                    && app.mouseX < app.width / 2 + btIniciarBase.width / 2
+	                    && app.mouseY > (app.height - 100) - (btIniciarBase.height / 2)
+	                    && app.mouseY < (app.height - 100) + (btIniciarBase.height / 2)) {
+	                    app.imageMode(PConstants.CENTER);
+	                    app.image(btIniciarPress, app.width / 2, app.height - 100);
+	                    app.imageMode(PConstants.CORNER);
+	                    btStart = false;
+	                    btJugar = true;
+	                    entrada = false;
 
-			if (noPregunta == 14) {
-				if (btJugar) {
-						System.out.println(puntaje);
-						gameOver = true;
-						return;
-						/*
-						 * 
-						 * AQU� TERMINA EL MINIJUEGO, AL PRESIONAR EN ESTE BOT�N
-						 * DEBER� PASAR A LA ENCUESTA DE AUTOEVALUACI�N.
-						 * 
-						 * ENTONCES AQU� VA LA LOGICA DE LA AUTOEVALUACI�N
-						 * 
-						 */
-						
-				}
-			}
+	                }
+	            }
+	        }
 
-			if (p != null) {
-				for (int i = 0; i < p.getRespuestas().size(); i++) {
-					Respuesta r = p.getRespuestas().get(i);
-					if (PApplet.dist(app.mouseX, app.mouseY, r.getX(), r.getY()) < 35) {
-						selRespuesta = r;
-					}
-				}
-			}
+	        // ----------------------------------------------CASO 0 - PREGUNTAS ABCD
+	        if (modoJuego == 0) {
+	            if (noPregunta > 2 && noPregunta < 14) {
+	                if (btJugar) {
+	                    if (app.mouseX > app.width / 2 - 50 && app.mouseX < app.width / 2 + 50
+	                        && app.mouseY > app.height - 125 && app.mouseY < app.height - 75) {
+	                        t_actualizado = t;
+	                        btJugar = false;
+	                        t_inicial = t;
+	                        noPregunta++;
+	                    }
+	                }
+	            }
 
-			if (navegacion != null) {
-				for (int i = 0; i < 4; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (PApplet.dist(app.mouseX, app.mouseY, navegacion[i][j].getX(),
-								navegacion[i][j].getY()) < navegacion[i][j].getTam() / 2) {
-							noPregunta = (i + (j * 4)) + 4;
 
-						}
-					}
-				}
 
-				for (int i = 0; i < 2; i++) {
-					if (PApplet.dist(app.mouseX, app.mouseY, navegacionFlechas[i].getX(),
-							navegacionFlechas[i].getY()) < navegacionFlechas[i].getTam2() / 2) {
-						if (i == 0) {
-							if (noPregunta > 4)
-								noPregunta--;
-						} else {
-							if (noPregunta < 15)
-								noPregunta++;
-						}
-					}
-				}
-			}
-		}
+	            if (p != null) {
+	                for (int i = 0; i < p.getRespuestas().size(); i++) {
+	                    Respuesta r = p.getRespuestas().get(i);
+	                    if (PApplet.dist(app.mouseX, app.mouseY, r.getX(), r.getY()) < 35) {
+	                        selRespuesta = r;
+	                    }
+	                }
+	            }
 
-		// -------------------------------------------CASO 1 - MATRIZ DE MEMORIA
+	            if (navegacion != null) {
+	                for (int i = 0; i < 4; i++) {
+	                    for (int j = 0; j < 3; j++) {
+	                        if (PApplet.dist(app.mouseX, app.mouseY, navegacion[i][j].getX(),
+	                                         navegacion[i][j].getY()) < navegacion[i][j].getTam() / 2) {
+	                            noPregunta = (i + (j * 4)) + 4;
 
-		if (modoJuego == 1) {
-			if (btJugar) {
-				if (dificultad != 3) {
-					if (app.mouseX > app.width / 2 - 50 && app.mouseX < app.width / 2 + 50
-							&& app.mouseY > app.height - 125 && app.mouseY < app.height - 75) {
-						contando = true;
-						t_actualizado = t;
-						btJugar = false;
-					}
-				} else {
-					t_actualizado = t;
-					btJugar = false;
-					t_inicial = t;
-					contando = true;
-					dificultad++;
-				}
-			}
-			if (estado == 0) {
-				if (casillas != null) {
-					for (int i = 0; i < casillas.size(); i++) {
-						Casilla c = casillas.get(i);
+	                        }
+	                    }
+	                }
 
-						if (PApplet.dist(c.getX(), c.getY(), app.mouseX, app.mouseY) < tamCasilla / 2) {
-							c.setMostrar(true);
-							if (c.isMostrado()) {
-								acertadas++;
-							}
+	                for (int i = 0; i < 2; i++) {
+	                    if (PApplet.dist(app.mouseX, app.mouseY, navegacionFlechas[i].getX(),
+	                                     navegacionFlechas[i].getY()) < navegacionFlechas[i].getTam2() / 2) {
+	                        if (i == 0) {
+	                            if (noPregunta > 4)
+	                                noPregunta--;
+	                        } else {
+	                            if (noPregunta < 15)
+	                                noPregunta++;
+	                        }
+	                    }
+	                }
+	            }
+	        }
 
-							destapados++;
+	        // -------------------------------------------CASO 1 - MATRIZ DE MEMORIA
 
-						}
-					}
-				}
-			}
-		}
-		}
+	        if (modoJuego == 1) {
+	            if(dificultad<14){
+	                if (btJugar) {
+	                    if (dificultad != 3) {
+	                        if (app.mouseX > app.width / 2 - 50 && app.mouseX < app.width / 2 + 50
+	                            && app.mouseY > app.height - 125 && app.mouseY < app.height - 75) {
+	                            contando = true;
+	                            t_actualizado = t;
+	                            btJugar = false;
+	                        }
+	                    } else {
+	                        t_actualizado = t;
+	                        btJugar = false;
+	                        t_inicial = t;
+	                        contando = true;
+	                        dificultad++;
+	                    }
+	                }
+	            }
+	            if (estado == 0) {
+	                if (casillas != null) {
+	                    for (int i = 0; i < casillas.size(); i++) {
+	                        Casilla c = casillas.get(i);
+
+	                        if (PApplet.dist(c.getX(), c.getY(), app.mouseX, app.mouseY) < tamCasilla / 2) {
+	                            c.setMostrar(true);
+	                            if (c.isMostrado()) {
+	                                acertadas++;
+	                            }
+
+	                            destapados++;
+
+	                        }
+	                    }
+	                }
+	            }
+	            if (dificultad == 14) {
+	                if (btJugar) {
+	                    System.out.println(puntaje);
+	                    gameOver = true;
+	                    return;
+	                    /*
+							 * 
+							 * AQU� TERMINA EL MINIJUEGO, AL PRESIONAR EN ESTE BOT�N
+							 * DEBER� PASAR A LA ENCUESTA DE AUTOEVALUACI�N.
+							 * 
+							 * ENTONCES AQU� VA LA LOGICA DE LA AUTOEVALUACI�N
+							 * 
+							 */
+
+	                }
+	            }
+	        }
+	    }
 	}
-
+	
 	public void dragged() {
 
 		if (selRespuesta != null) {

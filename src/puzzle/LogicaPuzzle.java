@@ -43,6 +43,9 @@ public class LogicaPuzzle {
 		app.image(img, 0, 0);
 		if (stage == 0) {
 			log.pintar();
+			if (log.getEndTime()>=360000) {
+				stage = 1;
+			}
 		} else if (stage == 1) {
 			fig.setTime(log.getTime());
 			fig.pintar();
@@ -50,10 +53,7 @@ public class LogicaPuzzle {
 			//CAMBIO DE PANTALLA, ENTRA S�LO UNA VEZ
 			if(fig.getTime()>=60000 && changeDos){
 				stage = 2;
-				counter++;
-				if (counter>= 6) {
 					gameOver = true;
-				}
 				changeDos = false;
 				return;
 			}
@@ -65,7 +65,7 @@ public class LogicaPuzzle {
 
 	public void pressed() {
 		
-		if(gameOver = true) {
+		if(gameOver == true) {
 			ui.click();
 			if(ui.getDoneHere() == true) {
 				saveData();

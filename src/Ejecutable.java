@@ -138,6 +138,9 @@ public class Ejecutable extends PApplet {
 		if (stage == 5) {
 			logicaPuzzle.paint();
 		}
+		if (stage == 6) {
+			exit();
+		}
 	}
 
 	public void draw() {
@@ -154,7 +157,7 @@ public class Ejecutable extends PApplet {
 	public void checkStage() {
 		if (stage == 0) {
 			if (inicio.getGameOver() == true) {
-				stage =5;
+				stage =1;
 				newStage = false;
 			}
 		}
@@ -178,7 +181,7 @@ public class Ejecutable extends PApplet {
 		}
 		if (stage == 4) {
 			if (logicaMemoria != null && logicaMemoria.getDataSaved() == true) {
-				stage = 1;
+				stage = 5;
 				newStage = false;
 			}
 		}

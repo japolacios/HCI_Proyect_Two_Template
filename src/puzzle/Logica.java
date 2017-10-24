@@ -246,4 +246,7 @@ public class Logica {
 	public int getPuntajeFinal() {
 		return puntajeFinal;
 	}
+	public long getEndTime() {
+		return stopMilis;
+	}
 }

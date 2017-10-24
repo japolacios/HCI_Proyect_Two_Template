@@ -11,8 +11,10 @@ public class Inicio {
 	}
 	
 	public void paint() {
-		app.text("Pantalla de Inicio", app.width/2, app.height/2);
+		app.fill(255);
+		app.text("Bienvenido y Gracias por participar", app.width/2, app.height/2);
 		app.rectMode(app.CENTER);
+		app.fill(0);
 		app.rect(((app.width/2)), ((app.height/3)*2), 200, 30);
 		app.fill(255);
 		app.text("Iniciar", app.width/2, ((app.height/3)*2)+6);
