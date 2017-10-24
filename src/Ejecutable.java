@@ -1,6 +1,7 @@
 
 import Balanzas.LogicaBalanzas;
 import lenguaje.LogicaLenguaje;
+import memoria.LogicaMemoria;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.Table;
@@ -26,6 +27,7 @@ public class Ejecutable extends PApplet {
 	public LogicaLenguaje logicaLenguaje;
 	public LogicaBalanzas logicaBalanzas;
 	public LogicaVp logicaVp;
+	private LogicaMemoria logicaMemoria;
 
 	public static void main(String[] args) {
 		PApplet.main("Ejecutable");
@@ -72,6 +74,10 @@ public class Ejecutable extends PApplet {
 			if (stage == 3) {
 				logicaVp = new LogicaVp(this, table);
 				System.out.println("Stage 3 Created");
+			}
+			if (stage == 4) {
+				logicaMemoria = new LogicaMemoria(this, table);
+				System.out.println("Stage 4 Created");
 			}
 			
 			newStage = true;
@@ -120,6 +126,9 @@ public class Ejecutable extends PApplet {
 		if (stage == 3) {
 			logicaVp.paint();
 		}
+		if (stage == 4) {
+			logicaMemoria.paint();
+		}
 	}
 
 	public void draw() {
@@ -154,6 +163,12 @@ public class Ejecutable extends PApplet {
 		}
 		if (stage == 3) {
 			if (logicaVp != null && logicaVp.getDataSaved() == true) {
+				stage = 4;
+				newStage = false;
+			}
+		}
+		if (stage == 4) {
+			if (logicaMemoria != null && logicaMemoria.getDataSaved() == true) {
 				stage = 1;
 				newStage = false;
 			}
@@ -189,6 +204,23 @@ public class Ejecutable extends PApplet {
 		if (stage == 3) {
 			logicaVp.mReleased();
 			}
+		if (stage == 4) {
+			logicaMemoria.soltar();
+		}
+		
+	}
+	
+	public void mousePressed() {
+		if (stage == 4) {
+			logicaMemoria.press();
+		}
+	}
+	
+	@Override
+	public void mouseDragged() {
+		if (stage == 4) {
+			logicaMemoria.dragged();
+		}
 	}
 	
 	public void keyPressed(){

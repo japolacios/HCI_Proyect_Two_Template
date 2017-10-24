@@ -12,11 +12,12 @@ public class LogicaLenguaje {
 	private PApplet app;
 	private ArrayList<MultipleChoiseModel> multiples;
 	private Ui ui;
-	private int correct, question;
-	private boolean start, gameOver, dataSaved, released;
+	private int correct, question, insNum;
+	private boolean start, gameOver, dataSaved, released, instrucciones, leer;
 	private Table table; // Se recibe desde Ejecutable para guardar los datos
 	public String tipoInteligencia = "Inteligencia Linguistica";
 	public PImage bg_q;
+	public ArrayList<PImage> insImg;
 
 	public LogicaLenguaje(PApplet _app, Table _table) {
 		app = _app;
@@ -31,7 +32,23 @@ public class LogicaLenguaje {
 		released = true;
 		question = 0; // DevPurpose
 		bg_q = app.loadImage("./data/lenguaje/fondo_lenguaje.png");
+		instrucciones = true;
+		insNum = 1;
+		insImg = new ArrayList<PImage>();
+		populateInstructions();
+	}
 
+	public void populateInstructions() {
+		PImage temp1 = app.loadImage("./data/lenguaje/analogias.jpg");
+		PImage temp2 = app.loadImage("./data/lenguaje/comprension.jpg");
+		PImage temp3 = app.loadImage("./data/lenguaje/palabras.jpg");
+		PImage temp4 = app.loadImage("./data/lenguaje/vocabulario.jpg");
+		PImage temp5 = app.loadImage("./data/lenguaje/parrafo.jpg");
+		insImg.add(temp1);
+		insImg.add(temp2);
+		insImg.add(temp3);
+		insImg.add(temp4);
+		insImg.add(temp5);
 	}
 
 	public void paint() {
@@ -40,7 +57,28 @@ public class LogicaLenguaje {
 		} else {
 			if (start == true && gameOver == false) {
 				app.image(bg_q, 0, 0);
-				paintQuestions(question);
+
+				if (instrucciones == true) {
+					if (insNum == 1) {
+						app.image(insImg.get(0), 0, 0);
+					}
+					if (insNum == 2) {
+						app.image(insImg.get(1), 0, 0);
+						if (leer == true) {
+							app.image(insImg.get(4), 0, 0);
+						}
+					}
+					if (insNum == 3) {
+						app.image(insImg.get(2), 0, 0);
+					}
+					if (insNum == 4) {
+						app.image(insImg.get(3), 0, 0);
+					}
+				} else {
+					if (question <= 18) {
+						paintQuestions(question);
+					}
+				}
 			}
 			if (gameOver == true) {
 				ui.paint();
@@ -53,13 +91,14 @@ public class LogicaLenguaje {
 
 	public void paintQuestions(int _q) {
 		app.fill(255);
+
 		app.text(multiples.get(_q).getQuestion(), (app.width / 2), (app.height / 4));
 
 		app.text((String) multiples.get(_q).gewtAnswerOne().get(0), (app.width / 3), (app.height / 4) * 2);
 		app.text((String) multiples.get(_q).gewtAnswerOne().get(1), (app.width / 3), (app.height / 4) * 3);
 		app.text((String) multiples.get(_q).gewtAnswerOne().get(2), (app.width / 3) * 2, (app.height / 4) * 2);
 		app.text((String) multiples.get(_q).gewtAnswerOne().get(3), (app.width / 3) * 2, (app.height / 4) * 3);
-
+		
 	}
 
 	public void populateMultiple() {
@@ -68,66 +107,64 @@ public class LogicaLenguaje {
 		MultipleChoiseModel q1 = new MultipleChoiseModel("Internet es a comunicar, como carro es a:", "Transportar",
 				"Correr", "Impuestos", "Alcohol");
 		// Correcta 2
-		MultipleChoiseModel q2 = new MultipleChoiseModel("Sentar es a silla, como acostar es a:", "Mesa", "Cama", "Asiento",
-				"Sala");
+		MultipleChoiseModel q2 = new MultipleChoiseModel("Sentar es a silla, como acostar es a:", "Mesa", "Cama",
+				"Asiento", "Sala");
 		// correcta 1
 		MultipleChoiseModel q3 = new MultipleChoiseModel("Aleta es a pez, como una mano es a:", "Humano", "Cerdo",
 				"Pájaro", "Anfibio");
 		// correcta 2
-		MultipleChoiseModel q4 = new MultipleChoiseModel("Volar es a cielo, cómo caer a:", "Pared", "Suelo",
-				"Patio", "Techo");
+		MultipleChoiseModel q4 = new MultipleChoiseModel("Volar es a cielo, cómo caer a:", "Pared", "Suelo", "Patio",
+				"Techo");
 		// correcta 4
-		MultipleChoiseModel q5 = new MultipleChoiseModel("Comida es a restaurante, como libro es a:", "Hospital", "Supermercado",
-				"Aeropuerto", "Biblioteca");
+		MultipleChoiseModel q5 = new MultipleChoiseModel("Comida es a restaurante, como libro es a:", "Hospital",
+				"Supermercado", "Aeropuerto", "Biblioteca");
 		// correcta 1
-		MultipleChoiseModel q6 = new MultipleChoiseModel("Leche es a vaca como, Lana es a:", "Oveja", "Abeja",
-				"Salmon", "Navaja");
+		MultipleChoiseModel q6 = new MultipleChoiseModel("Leche es a vaca como, Lana es a:", "Oveja", "Abeja", "Salmon",
+				"Navaja");
 		// correcta 4
 		MultipleChoiseModel q7 = new MultipleChoiseModel("Luna es a noche, como sol es a:", "Nube", "Eclipse",
 				"Estrella", "Día");
-		
-		//Breakpoint
+
+		// Breakpoint
 		// correcta 2
-		MultipleChoiseModel q8 = new MultipleChoiseModel("¿De qué nos habla el texto? Elige la respuesta más correcta.", "Del jardín de la casa", "Del cuarto de baño de la casa del molinero",
-				"De la chimenea", "De la casa del molinero");
+		MultipleChoiseModel q8 = new MultipleChoiseModel("¿De qué nos habla el texto? Elige la respuesta más correcta.",
+				"Del jardín de la casa", "Del cuarto de baño de la casa del molinero", "De la chimenea",
+				"De la casa del molinero");
 		// correcta 3
-		MultipleChoiseModel q9 = new MultipleChoiseModel("¿Cómo era el lavamanos del cuarto de baño?", "Acogedor ", "Mármol",
-				"Blanco", "Blanco con forma de serpiente");
+		MultipleChoiseModel q9 = new MultipleChoiseModel("¿Cómo era el lavamanos del cuarto de baño?", "Acogedor ",
+				"Mármol", "Blanco", "Blanco con forma de serpiente");
 		// correcta 3
-		MultipleChoiseModel q10 = new MultipleChoiseModel("¿Dónde estaba el jardín?", "En la parte delantera de la casa", "No tiene jardín",
-				"En la parte trasera de la casa.", "En el patio interior");
-		
-		//Breakpoint
+		MultipleChoiseModel q10 = new MultipleChoiseModel("¿Dónde estaba el jardín?",
+				"En la parte delantera de la casa", "No tiene jardín", "En la parte trasera de la casa.",
+				"En el patio interior");
+
+		// Breakpoint
 		// correcta 2
-		MultipleChoiseModel q11 = new MultipleChoiseModel("aamnadirn", "Idioma", "Fruta",
-				"Animal", "Color");
+		MultipleChoiseModel q11 = new MultipleChoiseModel("aamnadirn", "Idioma", "Fruta", "Animal", "Color");
 		// correcta 1
-		MultipleChoiseModel q12 = new MultipleChoiseModel("oeoenltf", "Objeto", "Pais",
-				"Ciudad", "Numero");
+		MultipleChoiseModel q12 = new MultipleChoiseModel("oeoenltf", "Objeto", "Pais", "Ciudad", "Numero");
 		// correcta 4
-		MultipleChoiseModel q13 = new MultipleChoiseModel("uanighr", "Animal", "Color",
-				"Pronombre", "Pais");
+		MultipleChoiseModel q13 = new MultipleChoiseModel("uanighr", "Animal", "Color", "Pronombre", "Pais");
 		// correcta 1
-		MultipleChoiseModel q14 = new MultipleChoiseModel("ppurrau", "Color", "Objeto",
-				"Pais", "Ciudad");
+		MultipleChoiseModel q14 = new MultipleChoiseModel("ppurrau", "Color", "Objeto", "Pais", "Ciudad");
 		// correcta 3
-		MultipleChoiseModel q15 = new MultipleChoiseModel("aensito", "Pais", "Animal",
-				"Objeto", "Color");
-		
-		
-		//BreakPoint
+		MultipleChoiseModel q15 = new MultipleChoiseModel("aensito", "Pais", "Animal", "Objeto", "Color");
+
+		// BreakPoint
 		// correcta 4
-		MultipleChoiseModel q16 = new MultipleChoiseModel("Fuimos a comer donde ___ mariscos con chocolate", "Ahí", "Ay",
-				"Hai", "Hay");
+		MultipleChoiseModel q16 = new MultipleChoiseModel("Fuimos a comer donde ___ mariscos con chocolate", "Ahí",
+				"Ay", "Hai", "Hay");
 		// correcta 4
-		MultipleChoiseModel q17 = new MultipleChoiseModel("Sinonimo de nostalgia:  -palabras parecidas pero que no son cotidianas", "Arañazo", "Añuranza",
+		MultipleChoiseModel q17 = new MultipleChoiseModel(
+				"Sinonimo de nostalgia:  -palabras parecidas pero que no son cotidianas", "Arañazo", "Añuranza",
 				"Aruñanza", "Añoranza");
 		// correcta 1
-				MultipleChoiseModel q18 = new MultipleChoiseModel("Los diferentes tipos de antónimos son:", "Gradual, complementario, recíproco", "Complementario, negador, sinónimo",
-						"Inequívoco, gradual, igualitario", "Recíproco, complementario, nulo");
-				// correcta 3
-				MultipleChoiseModel q19 = new MultipleChoiseModel("Un verbo indica un:", "Acción, operación, nombre", "Descripción, acción, operación",
-						"Acción, proceso, estado", "Actuacion, nombre, estado");
+		MultipleChoiseModel q18 = new MultipleChoiseModel("Los diferentes tipos de antónimos son:",
+				"Gradual, complementario, recíproco", "Complementario, negador, sinónimo",
+				"Inequívoco, gradual, igualitario", "Recíproco, complementario, nulo");
+		// correcta 3
+		MultipleChoiseModel q19 = new MultipleChoiseModel("Un verbo indica un:", "Acción, operación, nombre",
+				"Descripción, acción, operación", "Acción, proceso, estado", "Actuacion, nombre, estado");
 
 		multiples.add(q1);
 		multiples.add(q2);
@@ -166,136 +203,229 @@ public class LogicaLenguaje {
 	public void click() {
 		if (gameOver == false) {
 			if (released == true) {
-				if (question == 0) {
-					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-						released = false;
-						question++;
-						correct++;
-						return;
-					}
-				}
-				if (question == 1) {
-					if (app.dist(app.mouseX, app.mouseY, (app.width / 3), (app.height / 4) * 3) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						return;
-					}
-				}
-				if (question == 2) {
-					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						return;
-					}
-				} 
-				if (question == 3) {
-					if (app.dist(app.mouseX, app.mouseY, (app.width / 3), (app.height / 4) * 3) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						return;
-					}
-				}
-				if (question == 4) {
-					if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						return;
-					}
-				}
-				if (question == 5) {
-					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						return;
-					}
-				}
-				if (question == 6) {
-					if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
-						question++;
-						correct++;						
-						released = false;
-						return;
-					}
-				}
-				if (question == 7) {
-					if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						return;
-					}
-				}
-				if (question == 8) {
-					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						return;
-					}
-				}
-				if (question == 9) {
-					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						return;
-					}
-				}
-				if (question == 10) {
-					if (app.dist(app.mouseX, app.mouseY, (app.width / 3), (app.height / 4) * 3) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						return;
-					}
-				}
-				if (question == 11) {
-					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-						question++;
-						correct++;						
-						released = false;
-						return;
-					}
-				}
-				if (question == 12) {
-					if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
-						question++;
-						correct++;						
-						released = false;
-						return;
-					}
-				}
-				if (question == 13) {
-					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-						question++;
-						correct++;						
-						released = false;
-						return;
-					}
-				}
-				if (question == 14) {
-					if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
-						question++;
-						correct++;
-						released = false;
-						gameOver = true;
-						return;
-					}
-					else {
-						gameOver = true;
-						return;
-					}
-				}
-				else {
-					question++;
+				if (instrucciones == true) {
+					System.out.println("Click en Instrucciones: " + instrucciones + " -Question: " + question);
 					released = false;
+					instrucciones = false;
+					System.out.println("insturcciones False");
 					return;
 				}
+					
+					if (question == 0) {
+						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+							released = false;
+							question++;
+							correct++;
+							insNum++;
+							return;
+						}
+					}
+					if (question == 1) {
+						if (app.dist(app.mouseX, app.mouseY, (app.width / 3), (app.height / 4) * 3) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							return;
+						}
+					}
+					if (question == 2) {
+						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							return;
+						}
+					}
+					if (question == 3) {
+						if (app.dist(app.mouseX, app.mouseY, (app.width / 3), (app.height / 4) * 3) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							return;
+						}
+					}
+					if (question == 4) {
+						if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							return;
+						}
+					}
+					if (question == 5) {
+						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							return;
+						}
+					}
+					if (question == 6) {
+						if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							return;
+						}
+					}
+					if (question == 7) {
+						if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
+
+							correct++;
+							released = false;
+							instrucciones = true;
+							System.out.println("insturcciones True");
+							return;
+						}
+
+						// BreakPoint
+					}
+					if (question == 8) {
+						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							insNum++;
+							return;
+						}
+					}
+					if (question == 9) {
+						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							return;
+						}
+					}
+					if (question == 10) {
+						if (app.dist(app.mouseX, app.mouseY, (app.width / 3), (app.height / 4) * 3) <= 100) {
+
+							correct++;
+							released = false;
+							instrucciones = true;
+							System.out.println("insturcciones True");
+							return;
+						}
+
+						// BreackPoint
+					}
+					if (question == 11) {
+						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							insNum++;
+							return;
+						}
+					}
+					if (question == 12) {
+						if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							return;
+						}
+					}
+					if (question == 13) {
+						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+							question++;
+							correct++;
+							released = false;
+							return;
+						}
+					}
+					if (question == 14) {
+						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+							question++;
+							correct++;
+							released = false;
+
+							return;
+						}
+						if (question == 15) {
+							if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+
+								correct++;
+								released = false;
+								instrucciones = true;
+								System.out.println("Que sucede aqui¿?");
+								return;
+							}
+
+							// BreakPoint
+						}
+						if (question == 16) {
+							if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
+								question++;
+								correct++;
+								released = false;
+								System.out.println("Porque no llega?");
+								return;
+							}
+						}
+						if (question == 17) {
+							if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
+								question++;
+								correct++;
+								released = false;
+								return;
+							}
+						}
+						if (question == 18) {
+							if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+								question++;
+								correct++;
+								released = false;
+								return;
+							}
+						}
+							if (question == 19) {
+								if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
+									// question++;
+									correct++;
+									released = false;
+									instrucciones = false;
+									gameOver = true;
+									System.out.println("LastOne");
+									return;
+								}
+							}
+						else {
+							System.out.println("LastOne");
+							gameOver = true;
+							return;
+						}
+					} else {
+						if(question>=19) {
+							gameOver= true;
+							released = false;
+							return;
+						}
+						if(question == 7) {
+							question++;
+							instrucciones = true;
+							insNum++;
+							return;
+						}
+						if(question == 10) {
+							question++;
+							instrucciones = true;
+							insNum++;
+							return;
+							
+						}
+						if(question == 15) {
+							question++;
+							instrucciones = true;
+							insNum++;
+							return;
+						}
+						question++;
+						released = false;
+						return;
+						
+					}
+				
 			}
 		}
 		if (gameOver == true) {
@@ -305,10 +435,9 @@ public class LogicaLenguaje {
 
 	public void released() {
 		released = true;
-		//System.out.println("Really released");
+		// System.out.println("Really released");
 	}
-	
-	
+
 	public boolean getDataSaved() {
 		return dataSaved;
 	}

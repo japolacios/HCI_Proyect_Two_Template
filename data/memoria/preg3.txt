@@ -1,0 +1,12 @@
+﻿5 - 3 x 2 + 4 - 4 / 2 = ?:1_3_12_27:1
+( 4 + 3 ) - ( 3 x 2 ) + 1 = ?:-2_8_2_-8:2
+Para pagar una deuda entrego dos billetes de $20 y uno de $10;# me devuelven una moneda de 2 centavos, dos de 1 centavo,#una de 20 centavos y otra de 10 centavos.#¿A cuánto asciende mi deuda?:$46,8_$50,8_$45,7_$30,6:$45,7
+Chris tenía $ 4 en efectivo, con el cual compró café por $ 0.79,#una bolsa de fichas por $ 1.69 y un billete de lotería por $ 1.00.#Si no tiene que pagar el impuesto sobre las ventas, ¿cuánto cambio debería recibir?:$1.52_$1.12_$0.48_$0.52:$0.52
+5  ?  2 x ( - 3 ) = -1:+_-_x_÷:+
+( 12 - 5 )  ?  4 - 8 = 20:+_-_x_÷:x
+( - 5 ) x [( + 18 ) / ( - 9 )] = ?:10:10
+[( + 8 ) / ( - 2 )] x ( + 2 ) = ?:-8:-8
+Cuatro personas forman un negocio y crean un contrato para dividir las ganancias# equitativamente entre los cuatro. Gary invierte $11,000, Neil invierte $4,000,# Jill invierte $5,000, y Steve invierte $8,000. Las ganancias al final del año son de# $5,600. ¿Cuál es el monto que debe recibir Gary si las ganancias se dividen en# relación a la cantidad invertida por cada dueño?:$1,000_$1,400_$800_$2,200:$2,200
+Un producto que costaba $350 pesos sufre un incremento porcentual del 18%.#¿Cuánto hemos pagado finalmente por el producto?:$400_$413_$515_$542:$413
+( - 10 )  ?  [ 4 / ( - 2 )] = + 5:+_-_x_÷:÷
+30 - ( - 2 )  ?  ( - 10 ) + ( - 5 ) x ( - 2 ) = 20:+_-_x_÷:x

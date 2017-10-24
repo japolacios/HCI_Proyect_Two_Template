@@ -46,19 +46,21 @@ public class Patron {
 	}
 
 	public void mover() {
-		if (izq) {
-			vel.add(new PVector(-0.07f, 0));
-			der = false;
-		} else if (der) {
-			vel.add(new PVector(0.07f, 0));
-			izq = false;
+		if (pos.y >= 10) {
+			if (izq) {
+				vel.add(new PVector(-0.07f, 0));
+				der = false;
+			} else if (der) {
+				vel.add(new PVector(0.07f, 0));
+				izq = false;
+			}
 		}
 
 		vel.add(ace);
 		vel.limit(topS);
 		pos.add(vel);
 	}
-
+	
 	private void colores() {
 		switch (contador) {
 		case 0: // RED

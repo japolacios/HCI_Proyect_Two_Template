@@ -1,0 +1,12 @@
+﻿3 + 3 x 3 + 3 = ?:21_15_6_27:15
+3 + ( - 5 ) = ?:-2_8_2_-8:-2
+Juan tiene 85$ y se ha comprado una chocolatina que le costó 35$#y unos caramelos que le costaron 25$. ¿Cuánto dinero le sobrará?:50_20_60_25:25
+Compró un bote de mermelada de 52$ y una lata de sardinas de 36$.# ¿Cuánto gastó?:84_90_88_94:88
+- 3  ?  ( - 5 ) = - 8:+_-_x_÷:+
+3  ?  ( - 2 ) = - 6:+_-_x_÷:x
+7 - (5 + 10) = ?:7_15_-8_8:-8
+2 - [( + 3 ) - ( - 5 )] -4 = ?:20_-12_-10_-4:-10
+Un submarino se encuentra a 120 m  de profundidad. Si asciende 60 m,#¿Cuál es su posición ahora?:40 m_10 m_60 m_80 m:60 m
+En una industria de congelados, la nave de envasado está a 10°C#y en el interior del almacén frigorífico, a 15°C bajo cero.#¿Cúal es la diferencia de temperatura entre la nave y la cámara?:20°C_19°C_25°C_45°C:25°C
+( - 3 )  ?  [ ( -9 ) + ( - 2 ) ] = 33:+_-_x_÷:x
+[ 5 - (- 5 ) ]  ?  - 2 = - 5:+_-_x_÷:÷

@@ -1,0 +1,12 @@
+﻿3 x ( 4 x 2 - 3 ) - ( 4 + 6 / 3 ) = ?:8_9_6_10:9
+7 + ( 6 x 5 + 3 ) / 11 = ?:9_3_12_27:10
+La clase de ciencia tiene el doble de niños que de niñas. Durante la evaluación#al final del año el promedio de las niñas fue de 90 puntos, el de la clase entera#fue de 80 puntos por persona. ¿Cuál es el promedio de puntaje de los niños de la clase?:75_85_80_70:75
+Suma todos los números impares de la lista 2, 3, 6, 7, 9, 13, 14, 15.#La respuesta es un número par o impar?:Par_Impar:Impar
+21 ÷ 3  ?  7 x 4 = 35:+_-_x_÷:+
+16 + 9  ?  80 ÷ 8 = 15:+_-_x_÷:-
+[ - 2 + 3 x ( 2 - 5 ) / 3 ] - [( 3 - 5 + 2 ) - 2 x ( 3 - 4 )] = ?:-7_9_6_10:9
+30 - ( - 2 ) x ( - 10 ) + ( - 5 ) x ( - 2) = ?:8_20_6_10:20
+En una prueba de salto de longitud Silvia saltó 1,5 m en su primera# oportunidad, 1,75 m en la segunda y 2,3 m en su último salto. Si el record# de 3 saltos está en 5,80 m ¿Cuánto le faltó para alcanzarlo?:0,75 m_0,45 m_0,55 m_0,25m:0,25m
+En el festival de navidad de la escuela, el teatro se fue llenando por partes.# Primero llegaron 2/9 partes de espectadores, después entraron 3/9 y, por último,# entraron 1/9 partes de espectadores ¿Qué parte del teatro se ocupó?:6/9_6/18_3/9_6/27:3/9
+6 - ( - 9 + 7 - 1 )  ?  [ 3 - ( - 5 + 4 + 6 ) - 1 ] = 12:+_-_x_÷:-
+( - 10 ) / [ 4  ?  ( - 2 )] = 5:+_-_x_÷:÷

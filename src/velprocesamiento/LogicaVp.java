@@ -47,7 +47,7 @@ public class LogicaVp {
 		banderas = new LinkedList<Bandera>();
 		databaseFlags();
 		crono = new Cronometro(app);
-		crono.setCorriendo(true);
+
 
 		boton = new PImage[3];
 		boton[0] = app.loadImage("../data/boton/Recurso 1.png");
@@ -103,6 +103,7 @@ public class LogicaVp {
 					break;
 
 				case 2:
+					crono.setCorriendo(true);
 					firstGame();
 					break;
 				}
@@ -146,36 +147,38 @@ public class LogicaVp {
 
 	private void firstGame() {
 		app.image(fondo1, 0, 0);
+		if ((crono.getSec() >= 10 || crono.getMin() >= 0) ) {
 
-		for (int i = 0; i < patrones.size(); i++) {
-			patrones.get(i).mover();
-			patrones.get(i).pintar();
-			Patron pTemp = patrones.getLast();
-			if (pTemp.getX() >= app.width + 40 || pTemp.getX() <= -40) {
-				System.out.println("SE CREA NUEVO ASTEROIDE");
-				validacionAsteroides();
-				turnosG2+=1;
-				crearAsteroides();
-				patrones.getLast().setSpeed();
-				patrones.getLast().setDer(false);
-				patrones.getLast().setIzq(false);
-				patrones.removeFirst();
-			} else if (patrones.getLast().getY() >= app.height + 40) {
-				crearAsteroides();
-				turnosG2+=1;
-				patrones.getLast().setSpeed();
-				patrones.getLast().setDer(false);
-				patrones.getLast().setIzq(false);
-				patrones.removeFirst();
+			for (int i = 0; i < patrones.size(); i++) {
+				patrones.get(i).mover();
+				patrones.get(i).pintar();
+				Patron pTemp = patrones.getLast();
+				if (pTemp.getX() >= app.width + 40 || pTemp.getX() <= -40) {
+					System.out.println("SE CREA NUEVO ASTEROIDE");
+					validacionAsteroides();
+					System.out.println("PUNTAJE: " + correct);
+					crearAsteroides();
+					patrones.getLast().setSpeed();
+					patrones.getLast().setDer(false);
+					patrones.getLast().setIzq(false);
+					patrones.removeFirst();
+					turnosG2 += 1;
+				} else if (patrones.getLast().getY() >= app.height + 60) {
+					crearAsteroides();
+					System.out.println("PUNTAJE: " + correct);
+					patrones.getLast().setSpeed();
+					patrones.getLast().setDer(false);
+					patrones.getLast().setIzq(false);
+					patrones.removeFirst();
+					turnosG2 += 1;
+				}
 			}
 		}
-		
-		if (turnosG2==15) {
-			gameOver=true;
+		if (turnosG2 == 15) {
+			gameOver = true;
 		}
 
 	}
-
 	private void validacionAsteroides() {
 		if (patrones.getLast().getType() == 0 && patrones.getLast().getX() <= -40) {
 			correct+=1;
@@ -300,7 +303,7 @@ public class LogicaVp {
 	public void saveData() {
 		TableRow newRow = table.addRow();
 		newRow.setString("Tipo", tipoInteligencia);
-		newRow.setInt("Puntaje", correct);
+		newRow.setInt("Puntaje", calcularPuntaje());
 		newRow.setInt("Autopuntaje", ui.getAutoScore());
 		newRow.setInt("Posicion", ui.getPosition());
 		System.out.println("Saving CSV");
@@ -310,5 +313,10 @@ public class LogicaVp {
 
 	public boolean getDataSaved() {
 		return dataSaved;
+	}
+	public int calcularPuntaje(){
+		int porcentaje;
+		porcentaje= (int)(correct/25)*100;
+		return porcentaje;
 	}
 }
