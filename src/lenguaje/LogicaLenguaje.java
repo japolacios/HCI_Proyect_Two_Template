@@ -58,7 +58,7 @@ public class LogicaLenguaje {
 	}
 
 	public void paint() {
-		app.textSize(18);
+		app.textSize(15);
 		app.textFont(nunito[2]);
 		if (start == false) {
 			app.text("Pruebas de Lenguaje", app.width / 2, app.height / 2);
@@ -197,9 +197,10 @@ public class LogicaLenguaje {
 	}
 
 	public void saveData() {
+		int score =(int) (correct/question)*100;
 		TableRow newRow = table.addRow();
 		newRow.setString("Tipo", tipoInteligencia);
-		newRow.setInt("Puntaje", (int) (correct/question)*100);
+		newRow.setInt("Puntaje",  correct);
 		newRow.setInt("Autopuntaje", ui.getAutoScore());
 		newRow.setInt("Posicion", ui.getPosition());
 		System.out.println("Saving CSV");
@@ -209,6 +210,7 @@ public class LogicaLenguaje {
 	}
 
 	public void click() {
+//		System.out.println("Puntaje: " + correct + " - Question: " +question);
 		if (gameOver == false) {
 			if (released == true) {
 				if (instrucciones == true && leer == false) {
@@ -222,7 +224,7 @@ public class LogicaLenguaje {
 					released = false;
 					leer = false;
 					return;
-				}
+				} else {
 					
 					if (question == 0) {
 						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
@@ -275,8 +277,9 @@ public class LogicaLenguaje {
 					}
 					if (question == 6) {
 						if (app.dist(app.mouseX, app.mouseY, (app.width / 3) * 2, (app.height / 4) * 3) <= 100) {
-
+							question++;
 							correct++;
+							insNum=2;
 							released = false;
 							instrucciones = true;
 							leer= true;
@@ -312,6 +315,8 @@ public class LogicaLenguaje {
 							return;
 						}
 					}
+					
+					// BreakPoint
 					if (question == 10) {
 						if (app.dist(app.mouseX, app.mouseY, (app.width / 3), (app.height / 4) * 3) <= 100) {
 
@@ -322,14 +327,14 @@ public class LogicaLenguaje {
 							return;
 						}
 
-						// BreackPoint
+
 					}
 					if (question == 11) {
 						if (app.dist(app.mouseX, app.mouseY, app.width / 3, (app.height / 4) * 2) <= 100) {
 							question++;
 							correct++;
 							released = false;
-							insNum++;
+							insNum=3;
 							return;
 						}
 					}
@@ -363,6 +368,7 @@ public class LogicaLenguaje {
 								correct++;
 								released = false;
 								instrucciones = true;
+								insNum=4;
 								System.out.println("Que sucede aqui¿?");
 								return;
 							}
@@ -407,7 +413,9 @@ public class LogicaLenguaje {
 							}
 						else {
 							System.out.println("LastOne");
+							if(question >= 19) {
 							gameOver = true;
+							}
 							return;
 						}
 					} else {
@@ -419,21 +427,21 @@ public class LogicaLenguaje {
 						if(question == 6) {
 							question++;
 							instrucciones = true;
-							insNum++;
+							insNum = 2;
 							leer = true;
 							return;
 						}
 						if(question == 10) {
 							question++;
 							instrucciones = true;
-							insNum++;
+							insNum = 3;
 							return;
 							
 						}
 						if(question == 15) {
 							question++;
 							instrucciones = true;
-							insNum++;
+							insNum = 4;
 							return;
 						}
 						question++;
@@ -443,6 +451,8 @@ public class LogicaLenguaje {
 					}
 				
 			}
+		}
+		
 		}
 		if (gameOver == true) {
 			ui.click();
