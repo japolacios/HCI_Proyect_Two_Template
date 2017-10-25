@@ -13,7 +13,7 @@ public class LogicaLenguaje {
 	private PApplet app;
 	private ArrayList<MultipleChoiseModel> multiples;
 	private Ui ui;
-	private int correct, question, insNum;
+	private float correct, question, insNum;
 	private boolean start, gameOver, dataSaved, released, instrucciones, leer;
 	private Table table; // Se recibe desde Ejecutable para guardar los datos
 	public String tipoInteligencia = "Inteligencia Linguistica";
@@ -84,7 +84,7 @@ public class LogicaLenguaje {
 					}
 				} else {
 					if (question <= 18) {
-						paintQuestions(question);
+						paintQuestions((int)question);
 					}
 				}
 			}
@@ -197,10 +197,11 @@ public class LogicaLenguaje {
 	}
 
 	public void saveData() {
-		int score =(int) (correct/question)*100;
+		float score = (correct/question)*100;
+		System.out.println("score: "+ score);
 		TableRow newRow = table.addRow();
 		newRow.setString("Tipo", tipoInteligencia);
-		newRow.setInt("Puntaje",  correct);
+		newRow.setFloat("Puntaje",  score);
 		newRow.setInt("Autopuntaje", ui.getAutoScore());
 		newRow.setInt("Posicion", ui.getPosition());
 		System.out.println("Saving CSV");
@@ -208,7 +209,7 @@ public class LogicaLenguaje {
 		app.saveTable(table, "data/new.csv");
 		dataSaved = true;
 	}
-
+	
 	public void click() {
 //		System.out.println("Puntaje: " + correct + " - Question: " +question);
 		if (gameOver == false) {

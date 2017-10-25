@@ -15,7 +15,7 @@ public class LogicaVp {
 	private boolean start, gameOver, dataSaved;
 	private Table table;
 	public String tipoInteligencia = "Velocidad Procesamiento";
-	private int correct;
+	private float correct;
 	private LinkedList<Patron> patrones;
 	private LinkedList<Bandera> banderas;
 	private Cronometro crono;
@@ -303,7 +303,7 @@ public class LogicaVp {
 	public void saveData() {
 		TableRow newRow = table.addRow();
 		newRow.setString("Tipo", tipoInteligencia);
-		newRow.setInt("Puntaje", calcularPuntaje());
+		newRow.setFloat("Puntaje", calcularPuntaje());
 		newRow.setInt("Autopuntaje", ui.getAutoScore());
 		newRow.setInt("Posicion", ui.getPosition());
 		System.out.println("Saving CSV");
@@ -314,9 +314,9 @@ public class LogicaVp {
 	public boolean getDataSaved() {
 		return dataSaved;
 	}
-	public int calcularPuntaje(){
-		int porcentaje;
-		porcentaje= (int)(correct/25)*100;
+	public float calcularPuntaje(){
+		float porcentaje;
+		porcentaje= (correct/25)*100;
 		return porcentaje;
 	}
 }
