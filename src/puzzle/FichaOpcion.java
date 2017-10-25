@@ -45,11 +45,12 @@ public class FichaOpcion {
 			app.rect(getMapX(), getMapY(), img.width, img.height);
 			app.fill(360);
 			app.textAlign(PApplet.CENTER, PApplet.CENTER);
-			//app.text("V", x, y);
-			//app.text("x: " + getMapX() + " y: " + getMapY(), getMapX() + cutX, getMapY() + cutY);
+			// app.text("V", x, y);
+			// app.text("x: " + getMapX() + " y: " + getMapY(), getMapX() +
+			// cutX, getMapY() + cutY);
 			app.popStyle();
 		} else {
-			//app.text("F", x, y);
+			// app.text("F", x, y);
 		}
 	}
 

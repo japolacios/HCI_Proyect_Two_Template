@@ -29,15 +29,16 @@ public class Tablero {
 	}
 
 	public void pintar() {
-		app.noFill();
+		app.pushMatrix();
+		app.rectMode(PApplet.CORNER);
 		app.fill(240, 29, 22);
 		app.stroke(360);
 		app.strokeWeight(2);
 		app.rect(x, y, sX, sY);
 		app.fill(360);
-		//app.text(lugar, x + (sX / 2), y + (sY / 2));
+		app.popMatrix();
+		// app.text(lugar, x + (sX / 2), y + (sY / 2));
 	}
-
 
 	public void validar(LinkedList<Ficha> fichas) {
 		int count = 0;

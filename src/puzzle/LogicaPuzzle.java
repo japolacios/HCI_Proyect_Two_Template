@@ -27,7 +27,7 @@ public class LogicaPuzzle {
 		table = _table;
 		app.colorMode(app.HSB, 360, 100, 100);
 		log = new Logica(app);
-		fig = new EncontrarFigura(app, System.currentTimeMillis());
+		fig = new EncontrarFigura(app);
 		img = app.loadImage("fondo.png");
 		changeDos = true;
 		dataSaved = false;
@@ -36,45 +36,43 @@ public class LogicaPuzzle {
 	}
 
 	public void paint() {
-		
+
 		if (gameOver == true) {
 			ui.paint();
 		} else {
-		app.image(img, 0, 0);
-		if (stage == 0) {
-			log.pintar();
-			if (log.getEndTime()>=360000) {
-				stage = 1;
-			}
-		} else if (stage == 1) {
-			fig.setTime(log.getTime());
-			fig.pintar();
-			
-			//CAMBIO DE PANTALLA, ENTRA S�LO UNA VEZ
-			if(fig.getTime()>=60000 && changeDos){
-				stage = 2;
+			app.image(img, 0, 0);
+			if (stage == 0) {
+				log.pintar();
+				if (log.getEndTime() >= 360000) {
+					stage = 1;
+				}
+			} else if (stage == 1) {
+				fig.pintar();
+
+				// CAMBIO DE PANTALLA, ENTRA S�LO UNA VEZ
+				if (fig.getTime() >= 60000 && changeDos) {
+					stage = 2;
 					gameOver = true;
-				changeDos = false;
-				return;
+					changeDos = false;
+					return;
+				}
 			}
 		}
-		}
-		
-		//System.out.println(fig.getCambio());
+		// System.out.println(fig.getCambio());
 	}
 
 	public void pressed() {
-		
-		if(gameOver == true) {
+
+		if (gameOver == true) {
 			ui.click();
-			if(ui.getDoneHere() == true) {
+			if (ui.getDoneHere() == true) {
 				saveData();
 			}
 		} else {
-		
-		if (stage == 0)
-			log.select();
-		System.out.println(app.mouseX + " " + app.mouseY);
+
+			if (stage == 0)
+				log.select();
+			System.out.println(app.mouseX + " " + app.mouseY);
 		}
 	}
 
@@ -86,27 +84,28 @@ public class LogicaPuzzle {
 	public void released() {
 		System.out.println(stage);
 
-		if (log.getX() == 6 && log.getY() == 6) {
-			stage = 1;
-			fig.setTime(System.currentTimeMillis());
-		}
-
 		if (fig.getCambio() == true) {
 			stage = 2;
 		}
 
-		if (stage == 0) {
-			log.released();
-		} else if (stage == 1) {
+		if (stage == 1) {
 			fig.released();
+		} else if (stage == 0) {
 			System.out.println("logica Click");
+			log.released();
+		}
+
+		if (log.getX() == 6 && log.getY() == 6 && stage == 0) {
+			stage = 1;
+			System.out.println("Cambiando en logica");
+			fig.setTime(System.currentTimeMillis());
 		}
 	}
-	
+
 	public void saveData() {
 		TableRow newRow = table.addRow();
 		newRow.setString("Tipo", tipoInteligencia);
-		newRow.setInt("Puntaje", log.getPuntajeFinal());
+		newRow.setFloat("Puntaje", fig.getPuntaje() + log.getPuntajeFinal());
 		newRow.setInt("Autopuntaje", ui.getAutoScore());
 		newRow.setInt("Posicion", ui.getPosition());
 		System.out.println("Saving CSV");
@@ -114,6 +113,7 @@ public class LogicaPuzzle {
 		app.saveTable(table, "data/new.csv");
 		dataSaved = true;
 	}
+
 	public boolean getDataSaved() {
 		return dataSaved;
 	}

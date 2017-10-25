@@ -1,10 +1,12 @@
 package lenguaje;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Ui {
 	private PApplet app;
 	private boolean doneHere, first,second;
 	int autoScore, position;
+	public PImage bg;
 	public Ui(PApplet _app) {
 		app = _app;
 		doneHere = false;
@@ -12,10 +14,18 @@ public class Ui {
 		second = false;
 		autoScore = 5;
 		position = 5;
+		try {
+		bg = app.loadImage("./data/lenguaje/background.jpg");
+		} catch(Exception e) {
+			
+		}
 	}
 	
 	public void paint() {
 		//Here we paint the UI
+		app.image(bg,0,0);
+		app.textSize(18);
+		app.fill(255);
 		app.text("Como crees que te fue en la prueba", app.width/2, app.height/3);
 		for (int i = 0; i < 10; i++) {
 			app.fill(230,112,129);
@@ -23,7 +33,7 @@ public class Ui {
 			app.fill(255);
 			app.text(i+1, ((app.width/10)*i)+((app.width/10)/2), (app.height/3)+50);
 		}
-		app.fill(0);
+		app.fill(255);
 		app.text("Como crees que estas con respecto al resto de participantes", app.width/2, (app.height/3)*2);
 		for (int i = 0; i < 10; i++) {
 			app.fill(230,112,129);

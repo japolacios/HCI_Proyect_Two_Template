@@ -3,6 +3,7 @@ package lenguaje;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PImage;
 import processing.data.Table;
 import processing.data.TableRow;
@@ -18,6 +19,7 @@ public class LogicaLenguaje {
 	public String tipoInteligencia = "Inteligencia Linguistica";
 	public PImage bg_q;
 	public ArrayList<PImage> insImg;
+	private PFont[] nunito;
 
 	public LogicaLenguaje(PApplet _app, Table _table) {
 		app = _app;
@@ -36,6 +38,10 @@ public class LogicaLenguaje {
 		insNum = 1;
 		insImg = new ArrayList<PImage>();
 		populateInstructions();
+		nunito = new PFont[3];
+		nunito[0] = app.createFont("font/Nunito-Light.ttf", 20);
+		nunito[1] = app.createFont("font/Nunito-Regular.ttf", 20);
+		nunito[2] = app.createFont("font/Nunito-Bold.ttf", 20);
 	}
 
 	public void populateInstructions() {
@@ -52,6 +58,8 @@ public class LogicaLenguaje {
 	}
 
 	public void paint() {
+		app.textSize(18);
+		app.textFont(nunito[2]);
 		if (start == false) {
 			app.text("Pruebas de Lenguaje", app.width / 2, app.height / 2);
 		} else {

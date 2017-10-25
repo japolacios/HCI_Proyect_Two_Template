@@ -7,7 +7,9 @@ import processing.core.PFont;
 import processing.core.PImage;
 
 public class Logica {
+
 	private PApplet app;
+	private PImage rule;
 	private PImage[] img;
 	private PImage[][] temp;
 	private PImage[] button;
@@ -19,8 +21,10 @@ public class Logica {
 	private Timer time;
 	private PFont[] nunito;
 	private long startMilis, finalMilis, stopMilis;
+	private long totalStart, totalStop;
 	private int stage;
 	private int puntajeFinal;
+	private boolean isPlaying;
 
 	public Logica(PApplet app) {
 		this.app = app;
@@ -47,6 +51,8 @@ public class Logica {
 		nunito[1] = app.createFont("font/Nunito-Regular.ttf", 20);
 		nunito[2] = app.createFont("font/Nunito-Bold.ttf", 20);
 
+		rule = app.loadImage("pantalla1.png");
+
 		cuadros = new LinkedList<Tablero>();
 		fichas = new LinkedList<Ficha>();
 		x = 4;
@@ -59,8 +65,11 @@ public class Logica {
 		time.start();
 
 		startMilis = System.currentTimeMillis();
-
+		finalMilis = System.currentTimeMillis();
+		totalStart = System.currentTimeMillis();
+		stage = 0;
 		puntajeFinal = 0;
+		isPlaying = true;
 	}
 
 	private void cargarTablero(PImage img, int x, int y) {
@@ -96,40 +105,38 @@ public class Logica {
 	}
 
 	public void pintar() {
-		finalMilis = System.currentTimeMillis();
-		stopMilis = finalMilis - startMilis;
-		if (stopMilis >= 360000) {
-			startMilis = System.currentTimeMillis();
-			stage = 1;
-		}
-		app.fill(0);
-		app.ellipse(650, 50, 30, 30);
-		app.fill(0);
+		switch (stage) {
+		case 0:
+			app.image(rule, 0, 0);
+			nextButton(button, app.width / 2, 600);
+			break;
+		case 1:
 
-		nextButton(button, app.width / 2, 685);
-		app.pushStyle();
-		app.textFont(nunito[2]);
-		app.fill(360);
-		app.text(puntaje, 50, 650);
-		// app.text(time.getMin() + " : " + time.getSeg() + " : " +
-		// time.getMilis(), 10, 20);
-		app.popStyle();
+			finalMilis = System.currentTimeMillis();
+			stopMilis = finalMilis - startMilis;
+			finalMilis = System.currentTimeMillis();
+			totalStop = finalMilis - totalStart;
 
-		finalMilis = System.currentTimeMillis();
-		stopMilis = finalMilis - startMilis;
-		if (stopMilis <= 5000) {
-			// System.out.println(stopMilis);
-
-			app.image(img[nImg], (app.width / 2) - (img[nImg].width / 2), (app.height / 2) - (img[nImg].height / 2));
-		} else {
-			for (Tablero tablero : cuadros) {
-				tablero.pintar();
+			if (stopMilis <= 5000) {
+				app.image(img[nImg], (app.width / 2) - (img[nImg].width / 2),
+						(app.height / 2) - (img[nImg].height / 2));
+			} else {
+				for (Tablero tablero : cuadros) {
+					tablero.pintar();
+				}
+				for (Ficha ficha : fichas) {
+					ficha.pintar();
+				}
+				nextButton(button, app.width / 2, 685);
 			}
-			for (Ficha ficha : fichas) {
-				ficha.pintar();
-			}
+			app.pushStyle();
+			app.textFont(nunito[2]);
+			app.fill(360);
+			//app.text(puntaje, app.width/2, 50);
+			app.popStyle();
+			
+			break;
 		}
-		System.out.println(puntaje);
 	}
 
 	private void nextButton(PImage[] bt, int x, int y) {
@@ -159,6 +166,7 @@ public class Logica {
 				miFicha = fichas.get(i);
 			}
 		}
+
 	}
 
 	public void dragged() {
@@ -171,7 +179,6 @@ public class Logica {
 			stage = 1;
 		}
 		int punta = 0;
-		int dato = 0;
 		for (Tablero tablero : cuadros) {
 			if (validar(button[0], app.width / 2, 685)) {
 				tablero.validar(fichas);
@@ -192,7 +199,6 @@ public class Logica {
 							puntaje += 15;
 					}
 				}
-				// mostrarImage(nImg, 4, 4);
 			}
 		}
 
@@ -200,15 +206,14 @@ public class Logica {
 			for (Tablero tablero : cuadros) {
 				if (tablero.validatePos(miFicha)) {
 					miFicha.mover(tablero.getPosX(), tablero.getPosY());
-
 				}
 			}
 		}
 
-		if (validar(button[0], app.width / 2, 685)) {
-			startMilis = System.currentTimeMillis();
+		if (validar(button[0], app.width / 2, 685) && stage == 1) {
 			fichas.clear();
 			cuadros.clear();
+			startMilis = System.currentTimeMillis();
 			nImg++;
 			if (x == y) {
 				x++;
@@ -220,7 +225,16 @@ public class Logica {
 
 			cargarFichas(img[nImg], x, y);
 		}
+
 		miFicha = null;
+
+		if (validar(button[0], app.width / 2, 600) && stage == 0) {
+			stage = 1;
+			startMilis = System.currentTimeMillis();
+			totalStart = System.currentTimeMillis();
+		}
+
+		System.out.println(puntaje);
 	}
 
 	public int getX() {
@@ -242,11 +256,12 @@ public class Logica {
 	public void mostrarImage(int nimg, int sx, int sy) {
 		cargarFichas(img[nimg], sx, sy);
 	}
-	
+
 	public int getPuntajeFinal() {
 		return puntajeFinal;
 	}
+
 	public long getEndTime() {
-		return stopMilis;
+		return totalStop;
 	}
 }
